@@ -1,4 +1,4 @@
-  # Feature File Description : To Test Web App Scenarios -
+  # Feature File Description : To Test Web App Scenarios --
   @TestingApp
   Feature:  Test Web Application to add two numbers
 
