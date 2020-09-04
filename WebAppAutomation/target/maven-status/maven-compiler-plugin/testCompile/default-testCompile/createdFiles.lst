@@ -1,5 +1,0 @@
-pages\webAppPages\HomePage.class
-common\CommonMethods.class
-runners\TestingAppRunner.class
-steps\Hook.class
-steps\WebAppSteps.class

@@ -17,6 +17,7 @@ public class GlobalData {
     public static String strPlatformName;
     public static String strHTMLResultsFile;
     public static String strTestDataFile;
+    public static String strAPIBaseURL;
 
     //load config properties
     public void fnLoadProperties(){
@@ -26,6 +27,7 @@ public class GlobalData {
             strHTMLResultsFile=globalprop.getProperty("HTMLResultsFile");
             strTestDataFile =globalprop.getProperty("TestDataFile");
             iImplicitWaitTime =Integer.valueOf(globalprop.getProperty("implicitWaitTime"));
+            strAPIBaseURL=globalprop.getProperty("APIBaseURL");
         } catch (IOException ex) {
             ex.printStackTrace();
         }
