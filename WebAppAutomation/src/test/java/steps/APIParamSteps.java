@@ -1,6 +1,7 @@
 package steps;
 
 import common.CommonMethods;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import io.restassured.RestAssured;
@@ -25,14 +26,11 @@ public class APIParamSteps {
     public static Response response;
     FileWriter testDataFileWriter;
 
-
     CommonMethods commonMethods = new CommonMethods();
     StringBuffer stringBufferTestData = new StringBuffer();
 
-
     @Given("^users data API is requested$")
     public void usersDataAPIIsRequested() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
         String StrAPIRequestURL = GlobalData.strAPIBaseURL;
         RequestSpecification httpRequest= RestAssured.given();
         response = httpRequest.headers("Content-Type", ContentType.JSON, "Accept", ContentType.JSON)
@@ -45,17 +43,14 @@ public class APIParamSteps {
 
     @Then("^Response Code should be returned as \"([^\"]*)\"$")
     public void responseCodeShouldBeReturnedAs(String strStatusCode) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
         Assert.assertEquals(strStatusCode,String.valueOf(response.getStatusCode()));
     }
 
     @Then("^users data is stored in Test Data file$")
     public void usersDataIsStoredInTestDataFile() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
         RestAssured.defaultParser = Parser.JSON;
         List<String> jsonResponse = response.jsonPath().getList("$");
-        commonMethods.fnLogInfo("Size of Response Elements " + jsonResponse.size());
-        String usernames = response.jsonPath().getString("username");
+//        String usernames = response.jsonPath().getString("username");
         stringBufferTestData.append("Name,UserName,Email\n");
         for (int i=0;i<jsonResponse.size();i++){
             String strName = response.jsonPath().getString("name["+i+"]");
@@ -63,11 +58,20 @@ public class APIParamSteps {
             String strEmail = response.jsonPath().getString("email["+i+"]");
 
             stringBufferTestData.append(strName+","+strUserName+","+strEmail+"\n");
-            commonMethods.fnLogInfo("List is : " + stringBufferTestData.toString());
 
-            testDataFileWriter=commonMethods.fnCreateFile(GlobalData.strTestDataFile);
-            commonMethods.fnWriteIntoFile(testDataFileWriter,stringBufferTestData.toString());
-            testDataFileWriter.close();
         }
+        commonMethods.fnLogInfo("List of Users Data  : " + stringBufferTestData.toString());
+        testDataFileWriter=commonMethods.fnCreateFile(GlobalData.strTestDataFile);
+        commonMethods.fnWriteIntoFile(testDataFileWriter,stringBufferTestData.toString());
+        testDataFileWriter.close();
+    }
+
+    @Then("^Number of Records should be returned as \"([^\"]*)\"$")
+    public void numberOfRecordsShouldBeReturnedAs(String strNumberOfExpectedRecords) throws Throwable {
+        // Write code here that turns the phrase above into concrete actions
+        RestAssured.defaultParser = Parser.JSON;
+        List<String> jsonResponse = response.jsonPath().getList("$");
+        commonMethods.fnLogInfo("Number of Records in Response : " + jsonResponse.size());
+        Assert.assertEquals(strNumberOfExpectedRecords,String.valueOf(jsonResponse.size()));
     }
 }

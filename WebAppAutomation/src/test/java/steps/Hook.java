@@ -40,13 +40,13 @@ public class Hook {
 
         this.scenario = scenario;
         commonMethods.fnLogInfo("********** Scenario START : " + scenario.getName() +" **********");
-        if (scenario.getName().contains("Test Data Creation")){
+        if (scenario.getName().contains("API Test")){
             flagTestDataCreationScenario = true;
         }
 
         globalData.fnLoadProperties();
         Thread.sleep(1000);
-        // Initialize the driver only when it is first scenario. It is like BeforeSute condition
+        // Initialize the driver only when it is first scenario and it is not API Test. It is like BeforeSute condition
 
         if ((GlobalData.iTotalNumberOfScenarios == 0 ) && (!(flagTestDataCreationScenario))) {
             fnSetupDriver(GlobalData.globalprop.getProperty("AppBaseURL"));
@@ -60,11 +60,11 @@ public class Hook {
         System.out.println("Browser is closed");
         commonMethods.fnLogInfo("############# Scenario END : " + scenario.getName() +" #############");
 
-        if (!(scenario.getName().contains("Test Data Creation"))) {
+//        if (!(scenario.getName().contains("API Test"))) {
             commonMethods.fnLogInfo("$$$$$$$$$$$$$ Scenario STATUS : " + scenario.getStatus() + " $$$$$$$$$$$$$");
             GlobalData.iTotalNumberOfScenarios = GlobalData.iTotalNumberOfScenarios + 1;
-            // Take Snapshot if test case is failed
-            if ((!scenario.getStatus().contains("passed"))) {
+            // Take Snapshot if test case is failed and it is not API Test
+            if ((!scenario.getStatus().contains("passed")) && (!(scenario.getName().contains("API Test")))) {
                 byte[] screenshot = ((TakesScreenshot) this.driver).getScreenshotAs(OutputType.BYTES);
                 scenario.embed(screenshot, "image/png");
                 fnGetScreenshot();
@@ -94,7 +94,7 @@ public class Hook {
             commonMethods.fnLogInfo("results are written");
 //            driver.close();
 //            driver.quit();
-        }
+//        }
     }
 
     // Function to Take screenshot

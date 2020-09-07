@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: runners.TestAPIRunner
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 18.342 sec - in runners.TestAPIRunner

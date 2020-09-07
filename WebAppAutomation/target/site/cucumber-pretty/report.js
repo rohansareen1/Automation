@@ -3,13 +3,13 @@ formatter.feature({
   "comments": [
     {
       "line": 1,
-      "value": "# Feature File Description : To Test Register User Scenario and Activity PopUp"
+      "value": "# Feature File Description : To Test Sample API..It Fetch users data from API and store in File"
     }
   ],
   "line": 3,
-  "name": "Creating Test Data",
+  "name": "Testing Users Data Sample API",
   "description": "",
-  "id": "creating-test-data",
+  "id": "testing-users-data-sample-api",
   "keyword": "Feature",
   "tags": [
     {
@@ -19,21 +19,26 @@ formatter.feature({
   ]
 });
 formatter.scenarioOutline({
-  "line": 5,
-  "name": "Test Data Creation : Fetch users data from API and store name and username",
+  "line": 4,
+  "name": "API Test : Fetch users data from API and store name, username and email",
   "description": "",
-  "id": "creating-test-data;test-data-creation-:-fetch-users-data-from-api-and-store-name-and-username",
+  "id": "testing-users-data-sample-api;api-test-:-fetch-users-data-from-api-and-store-name,-username-and-email",
   "type": "scenario_outline",
   "keyword": "Scenario Outline"
 });
 formatter.step({
-  "line": 6,
+  "line": 5,
   "name": "users data API is requested",
   "keyword": "Given "
 });
 formatter.step({
-  "line": 7,
+  "line": 6,
   "name": "Response Code should be returned as \"\u003cResponseCode\u003e\"",
+  "keyword": "Then "
+});
+formatter.step({
+  "line": 7,
+  "name": "Number of Records should be returned as \"\u003cNumberOfRecords\u003e\"",
   "keyword": "Then "
 });
 formatter.step({
@@ -45,34 +50,36 @@ formatter.examples({
   "line": 9,
   "name": "",
   "description": "",
-  "id": "creating-test-data;test-data-creation-:-fetch-users-data-from-api-and-store-name-and-username;",
+  "id": "testing-users-data-sample-api;api-test-:-fetch-users-data-from-api-and-store-name,-username-and-email;",
   "rows": [
     {
       "cells": [
-        "ResponseCode"
+        "ResponseCode",
+        "NumberOfRecords"
       ],
       "line": 10,
-      "id": "creating-test-data;test-data-creation-:-fetch-users-data-from-api-and-store-name-and-username;;1"
+      "id": "testing-users-data-sample-api;api-test-:-fetch-users-data-from-api-and-store-name,-username-and-email;;1"
     },
     {
       "cells": [
-        "200"
+        "200",
+        "10"
       ],
       "line": 11,
-      "id": "creating-test-data;test-data-creation-:-fetch-users-data-from-api-and-store-name-and-username;;2"
+      "id": "testing-users-data-sample-api;api-test-:-fetch-users-data-from-api-and-store-name,-username-and-email;;2"
     }
   ],
   "keyword": "Examples"
 });
 formatter.before({
-  "duration": 1733141800,
+  "duration": 3760682200,
   "status": "passed"
 });
 formatter.scenario({
   "line": 11,
-  "name": "Test Data Creation : Fetch users data from API and store name and username",
+  "name": "API Test : Fetch users data from API and store name, username and email",
   "description": "",
-  "id": "creating-test-data;test-data-creation-:-fetch-users-data-from-api-and-store-name-and-username;;2",
+  "id": "testing-users-data-sample-api;api-test-:-fetch-users-data-from-api-and-store-name,-username-and-email;;2",
   "type": "scenario",
   "keyword": "Scenario Outline",
   "tags": [
@@ -83,15 +90,23 @@ formatter.scenario({
   ]
 });
 formatter.step({
-  "line": 6,
+  "line": 5,
   "name": "users data API is requested",
   "keyword": "Given "
 });
 formatter.step({
-  "line": 7,
+  "line": 6,
   "name": "Response Code should be returned as \"200\"",
   "matchedColumns": [
     0
+  ],
+  "keyword": "Then "
+});
+formatter.step({
+  "line": 7,
+  "name": "Number of Records should be returned as \"10\"",
+  "matchedColumns": [
+    1
   ],
   "keyword": "Then "
 });
@@ -104,7 +119,7 @@ formatter.match({
   "location": "APIParamSteps.usersDataAPIIsRequested()"
 });
 formatter.result({
-  "duration": 2312713400,
+  "duration": 10517552300,
   "status": "passed"
 });
 formatter.match({
@@ -117,18 +132,31 @@ formatter.match({
   "location": "APIParamSteps.responseCodeShouldBeReturnedAs(String)"
 });
 formatter.result({
-  "duration": 6494500,
+  "duration": 7098200,
+  "status": "passed"
+});
+formatter.match({
+  "arguments": [
+    {
+      "val": "10",
+      "offset": 41
+    }
+  ],
+  "location": "APIParamSteps.numberOfRecordsShouldBeReturnedAs(String)"
+});
+formatter.result({
+  "duration": 556247900,
   "status": "passed"
 });
 formatter.match({
   "location": "APIParamSteps.usersDataIsStoredInTestDataFile()"
 });
 formatter.result({
-  "duration": 1311337500,
+  "duration": 2133935800,
   "status": "passed"
 });
 formatter.after({
-  "duration": 325400,
+  "duration": 1329600,
   "status": "passed"
 });
 });
